@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_1/widget/favorite_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,11 +56,7 @@ Widget titleSection = Container(
           ],
         ),
       ),
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      const Text('41'),
+      const FavoriteWidget(),
     ],
   ),
 );
