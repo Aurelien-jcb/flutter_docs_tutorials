@@ -2,33 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_1/widget/favorite_widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const HeroApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HeroApp extends StatelessWidget {
+  const HeroApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Layout Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Layou Demo'),
-        ),
-        body: ListView(
-          children: [
-            Image.asset(
+      home: MainSection(),
+    );
+  }
+}
+
+class MainSection extends StatelessWidget {
+  const MainSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Layou Demo'),
+      ),
+      body: ListView(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const DetailScreen();
+                  },
+                ),
+              );
+            },
+            child: Image.asset(
               'assets/images/lake.jpg',
               width: 600,
               height: 240,
               fit: BoxFit.cover,
             ),
-            titleSection,
-            buttonSection,
-            textSection
-          ],
-        ),
+          ),
+          titleSection,
+          buttonSection,
+          textSection
+        ],
       ),
     );
   }
@@ -105,3 +126,24 @@ Widget textSection = const Padding(
     softWrap: true,
   ),
 );
+
+class DetailScreen extends StatelessWidget {
+  const DetailScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Center(
+          child: Hero(
+            tag: 'imageHero',
+            child: Image.asset('assets/images/lake.jpg'),
+          ),
+        ),
+      ),
+    );
+  }
+}
